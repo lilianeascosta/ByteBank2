@@ -56,7 +56,7 @@ class _ContactFormState extends State<ContactForm> {
                         final String name = _nameController.text;
                         final int accountNumber = int.parse(_accountNumberController.text);
                         // assining the contact into a new object
-                        final Contact newContact = Contact(name, accountNumber);
+                        final Contact newContact = Contact(0, name, accountNumber);
                         // and then, we navigate to previous screen with the new contact
                         Navigator.pop(context, newContact);
                       },
