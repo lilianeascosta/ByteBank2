@@ -10,7 +10,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -28,33 +28,31 @@ class Dashboard extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ContactsList(),
+                      builder: (context) => const ContactsList(),
                     ));
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: 100,
                     width: 150,
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.people,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Icon(
+                              Icons.people,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            Text(
+                              'Contacts',
+                              style: TextStyle(
                                 color: Colors.white,
-                                size: 24.0,
+                                fontSize: 16.0,
                               ),
-                              Text(
-                                'Contacts',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         )
                       ]
 
@@ -70,33 +68,31 @@ class Dashboard extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CodeBar(),
+                      builder: (context) => const CodeBar(),
                     ));
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: 100,
                     width: 150,
                     child: Column(
                         children: <Widget>[
-                          Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.access_time,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const <Widget>[
+                              Icon(
+                                Icons.access_time,
+                                color: Colors.white,
+                                size: 24.0,
+                              ),
+                              Text(
+                                'Contacts',
+                                style: TextStyle(
                                   color: Colors.white,
-                                  size: 24.0,
+                                  fontSize: 16.0,
                                 ),
-                                Text(
-                                  'Contacts',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ]
 

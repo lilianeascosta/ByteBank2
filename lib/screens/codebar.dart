@@ -25,7 +25,6 @@ class _CodeBarState extends State<CodeBar> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -40,6 +39,7 @@ class _CodeBarState extends State<CodeBar> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
@@ -53,9 +53,9 @@ class _CodeBarState extends State<CodeBar> {
                       children: <Widget>[
                         ElevatedButton(
                             onPressed: () => scanBarcodeNormal(),
-                            child: Text('Start barcode scan')),
+                            child: const Text('Start barcode scan')),
                         Text('Scan result : $_scanBarcode\n',
-                            style: TextStyle(fontSize: 20))
+                            style: const TextStyle(fontSize: 20))
                       ]));
             })));
   }

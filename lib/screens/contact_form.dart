@@ -1,8 +1,10 @@
+import 'package:bytebank2/database/dao/contact_dao.dart';
 import 'package:bytebank2/models/contact.dart';
-import 'package:bytebank2/database/app_database.dart';
 import 'package:flutter/material.dart';
 
 class ContactForm extends StatefulWidget {
+  const ContactForm({Key? key}) : super(key: key);
+
   @override
   State<ContactForm> createState() => _ContactFormState();
 }
@@ -10,12 +12,13 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
+  final ContactDao _contactDao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Contact'),
+        title: const Text('New Contact'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -24,11 +27,11 @@ class _ContactFormState extends State<ContactForm> {
             children: <Widget>[
               TextField(
                 controller: _nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   // to do the visal configuration
                   labelText: 'Full Name',
                 ),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                 ),
               ),
@@ -36,11 +39,11 @@ class _ContactFormState extends State<ContactForm> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: TextField(
                   controller: _accountNumberController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     // to do the visal configuration
                     labelText: 'Account Number',
                   ),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24.0,
                   ),
                   keyboardType: TextInputType.number,
@@ -51,7 +54,7 @@ class _ContactFormState extends State<ContactForm> {
                 child: SizedBox(
                   width: double.maxFinite, // the max value as possible inside his container, in this case, the column
                   child: ElevatedButton(
-                      child: Text('Create'),
+                      child: const Text('Create'),
                       onPressed: () {
                         // taking what the user typed into the constructos/variabels
                         final String name = _nameController.text;
@@ -59,7 +62,7 @@ class _ContactFormState extends State<ContactForm> {
                         // assining the contact into a new object
                         final Contact newContact = Contact(0, name, accountNumber);
                         // and then, we navigate to previous screen with the new contact
-                        save(newContact).then((id) => Navigator.pop(context));
+                        _contactDao.save(newContact).then((id) => Navigator.pop(context));
                       },
                   ),
                 ),

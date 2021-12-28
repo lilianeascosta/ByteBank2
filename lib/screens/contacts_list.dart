@@ -1,25 +1,28 @@
-import 'package:bytebank2/database/app_database.dart';
+import 'package:bytebank2/database/dao/contact_dao.dart';
 import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatefulWidget {
+  const ContactsList({Key? key}) : super(key: key);
+
   @override
   State<ContactsList> createState() => _ContactsListState();
 }
 
 class _ContactsListState extends State<ContactsList> {
   final List<Contact> contacts = [];
+  final ContactDao _contactDao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: const Text('Contacts'),
       ),
       body: FutureBuilder<List<Contact>>(
-        initialData: [],
-        future: findAll(),
+        initialData: const [],
+        future: _contactDao.findAll(),
         builder: (context, AsyncSnapshot<List<Contact>> snapshot) {
           switch (snapshot.connectionState) {
             // this is to deal with some "exceptions"
@@ -28,8 +31,7 @@ class _ContactsListState extends State<ContactsList> {
               break;
             case ConnectionState.waiting:
               // waiting for data or informations, so we do the load and then charge all data
-              return Center(child: CircularProgressIndicator());
-              break;
+              return const Center(child: CircularProgressIndicator());
             case ConnectionState.active:
               // the snapshot has a data but the future didn't provided it yet
               break;
@@ -44,22 +46,21 @@ class _ContactsListState extends State<ContactsList> {
                 },
                 itemCount: contacts.length,
               );
-              break;
           }
-          return Text('Unknown error');
+          return const Text('Unknown error');
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => ContactForm(),
+              builder: (context) => const ContactForm(),
             ),
           );
           // Force update (rebuild widget)
           setState(() {});
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
@@ -70,7 +71,7 @@ class _ContactsListState extends State<ContactsList> {
 class _ContactItem extends StatelessWidget {
   final Contact contact;
 
-  _ContactItem(this.contact);
+  const _ContactItem(this.contact);
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +80,11 @@ class _ContactItem extends StatelessWidget {
       child: ListTile(
         title: Text(
           contact.name,
-          style: TextStyle(fontSize: 24.0),
+          style: const TextStyle(fontSize: 24.0),
         ),
         subtitle: Text(
           contact.accountNumber.toString(),
-          style: TextStyle(fontSize: 16.0),
+          style: const TextStyle(fontSize: 16.0),
         ),
       ),
     );
