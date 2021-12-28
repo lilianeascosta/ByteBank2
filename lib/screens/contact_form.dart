@@ -1,4 +1,5 @@
 import 'package:bytebank2/models/contact.dart';
+import 'package:bytebank2/database/app_database.dart';
 import 'package:flutter/material.dart';
 
 class ContactForm extends StatefulWidget {
@@ -58,7 +59,7 @@ class _ContactFormState extends State<ContactForm> {
                         // assining the contact into a new object
                         final Contact newContact = Contact(0, name, accountNumber);
                         // and then, we navigate to previous screen with the new contact
-                        Navigator.pop(context, newContact);
+                        save(newContact).then((id) => Navigator.pop(context));
                       },
                   ),
                 ),

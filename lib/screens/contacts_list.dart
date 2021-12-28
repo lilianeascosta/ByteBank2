@@ -3,8 +3,12 @@ import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
+  @override
+  State<ContactsList> createState() => _ContactsListState();
+}
 
+class _ContactsListState extends State<ContactsList> {
   final List<Contact> contacts = [];
 
   @override
@@ -16,8 +20,9 @@ class ContactsList extends StatelessWidget {
       body: FutureBuilder<List<Contact>>(
         initialData: [],
         future: findAll(),
-        builder: (context, AsyncSnapshot<List<Contact>>snapshot) {
-          switch(snapshot.connectionState) { // this is to deal with some "exceptions"
+        builder: (context, AsyncSnapshot<List<Contact>> snapshot) {
+          switch (snapshot.connectionState) {
+            // this is to deal with some "exceptions"
             case ConnectionState.none:
               // not executed yet and need some action from the user. We're not using it in this app.
               break;
@@ -45,16 +50,14 @@ class ContactsList extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(
-                  builder: (context) => ContactForm(),
-                ),
-              )
-              .then(
-                (newContact) => debugPrint(newContact.toString()),
-              );
+        onPressed: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ContactForm(),
+            ),
+          );
+          // Force update (rebuild widget)
+          setState(() {});
         },
         child: Icon(
           Icons.add,
