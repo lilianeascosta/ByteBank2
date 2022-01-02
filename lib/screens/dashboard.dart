@@ -2,9 +2,9 @@ import 'package:bytebank2/screens/contacts_list.dart';
 import 'package:bytebank2/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
-import 'codebar.dart';
-
 class Dashboard extends StatelessWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +50,7 @@ class Dashboard extends StatelessWidget {
   void _showContactsList(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ContactsList(),
+        builder: (context) => const ContactsList(),
       ),
     );
   }
@@ -70,7 +70,7 @@ class _FeatureItem extends StatelessWidget {
   final IconData icon;
   final Function onClick;
 
-  _FeatureItem(this.name, this.icon, {required this.onClick});
+  const _FeatureItem(this.name, this.icon, {required this.onClick});
 
   @override
   Widget build(BuildContext context) {

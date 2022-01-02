@@ -1,9 +1,5 @@
-import 'package:bytebank2/http/webclient.dart';
 import 'package:bytebank2/screens/dashboard.dart';
 import 'package:flutter/material.dart';
-
-import 'models/contact.dart';
-import 'models/transactions.dart';
 
 
 void main() {
@@ -31,7 +27,7 @@ class ByteBank2 extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }

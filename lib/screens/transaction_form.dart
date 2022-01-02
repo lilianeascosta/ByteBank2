@@ -1,4 +1,4 @@
-import 'package:bytebank2/http/webclient.dart';
+import 'package:bytebank2/http/interceptors/webclients/transaction_webclient.dart';
 import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/models/transactions.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class TransactionForm extends StatefulWidget {
   final Contact contact;
 
-  TransactionForm(this.contact);
+  const TransactionForm(this.contact);
+
 
   @override
   _TransactionFormState createState() => _TransactionFormState();
@@ -14,12 +15,13 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
+  final TransactionWebClient _webClient = TransactionWebClient();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New transaction'),
+        title: const Text('New transaction'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -29,7 +31,7 @@ class _TransactionFormState extends State<TransactionForm> {
             children: <Widget>[
               Text(
                 widget.contact.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                 ),
               ),
@@ -37,7 +39,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
                   widget.contact.accountNumber.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 32.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -47,9 +49,9 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: TextField(
                   controller: _valueController,
-                  style: TextStyle(fontSize: 24.0),
-                  decoration: InputDecoration(labelText: 'Value'),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  style: const TextStyle(fontSize: 24.0),
+                  decoration: const InputDecoration(labelText: 'Value'),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               Padding(
@@ -57,13 +59,11 @@ class _TransactionFormState extends State<TransactionForm> {
                 child: SizedBox(
                   width: double.maxFinite,
                   child: ElevatedButton(
-                    child: Text('Transfer'), onPressed: () {
+                    child: const Text('Transfer'), onPressed: () {
                       final double? value = double.tryParse(_valueController.text);
                       final transactionCreated = Transaction(value!, widget.contact);
-                      save(transactionCreated).then((transaction) {
-                        if(transaction != null) {
-                          Navigator.pop(context);
-                        }
+                      _webClient.save(transactionCreated).then((transaction) {
+                        Navigator.pop(context);
                       });
                   },
                   ),
