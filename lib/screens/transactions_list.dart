@@ -1,6 +1,6 @@
 import 'package:bytebank2/components/centered_message.dart';
 import 'package:bytebank2/http/interceptors/webclients/transaction_webclient.dart';
-import 'package:bytebank2/models/transactions.dart';
+import 'package:bytebank2/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
