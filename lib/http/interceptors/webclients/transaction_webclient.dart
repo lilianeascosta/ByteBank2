@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 class TransactionWebClient {
   Future<List<Transaction>> findAll() async {
     final Response response =
-    await client.get(url).timeout(Duration(seconds: 5));
+    await client.get(url);
     List<Transaction> transactions = _toTransactions(response);
     return transactions;
   }
@@ -28,11 +28,7 @@ class TransactionWebClient {
       return Transaction.fromJson(jsonDecode(response.body));
     }
 
-    _throwHttpError(response.statusCode);
-  }
-
-  void _throwHttpError(int statusCode) {
-    throw Exception(_statusCodeResponses[statusCode]);
+    throw HttpException(_statusCodeResponses[response.statusCode]);
   }
 
   static final Map<int, String> _statusCodeResponses = {
@@ -61,4 +57,10 @@ class TransactionWebClient {
     };
     return transactionMap;
   }
+}
+
+class HttpException implements Exception {
+  final String? message;
+
+  HttpException(this.message);
 }
