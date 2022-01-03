@@ -28,7 +28,7 @@ class ByteBank2 extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: const TransactionAuthDialog(),
+      home: const Dashboard(),
     );
   }
 }
